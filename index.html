@@ -45,10 +45,7 @@
 
     <script>
         const createStore = (reducer, initialState) => { //Base de Redux
-            let state = {
-                initialState,
-                calInicial: 1360563
-            }
+            let state = initialState
 
             let updater = () => { };
             const getState = () => state;
@@ -84,7 +81,13 @@
             return action;
         };
 
-        const store = createStore(reducer, 0);
+        const store = createStore(
+            reducer, 
+            { 
+                initialState: 0,
+                calInicial: 1360563
+            }
+        );
         // store.dispatch() //Enviar Acciones
         // store.getState() //Estado de la aplicacion
         // store.subscribe() //
@@ -94,15 +97,42 @@
             window.result.textContent = `Has quemado ${store.getState().initialState} calorías`;
             window.resultPend.textContent = `Calorías Faltantes a quemar: ${store.getState().calInicial}`;
         });
+
+        // let state = true;
+        // let contador = 0;
+        // let pares = 0;
+        // let impares = 0;
         
         const burn = () => {
+            // state = false;
             store.dispatch({
                 type: 'BURN',
                 payload: 1.42
             });
+            // console.log(`Numeros pares: ${pares}`);
+            // console.log(`Numeros impares: ${impares}`);
         }
+        
+        // setInterval(() => {
+        //     while (state) {
+        //         contador += 1;
+        //         console.log(contador);
+
+        //         if (contador % 2 == 0) {
+        //             pares += 1;
+        //             break;
+        //         }
+
+        //         impares += 1;
+        //     }
+        // }, 500);
 
         window.burn.addEventListener('click', burn)
+
+
+
+
+
 
     </script>
 </body>
